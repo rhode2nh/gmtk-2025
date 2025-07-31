@@ -53,7 +53,7 @@ namespace Wannabuh.FPSController
         private int _extraJumps;
         
         // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Awake()
+        protected virtual void Awake()
         {
             _fpsActions = new FPSActions();
             _rb = GetComponent<Rigidbody>();
