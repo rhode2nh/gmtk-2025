@@ -8,29 +8,40 @@ namespace Wannabuh.FPSController
     [RequireComponent(typeof(Rigidbody))]
     public class FPSController : MonoBehaviour
     {
-        [SerializeField] private float _sensitivity = 20.0f;
+        [Header("Movement")]
+        [SerializeField] private float _mouseSensitivity = 20.0f;
         [SerializeField] private float _moveSpeed = 0.1f;
         [SerializeField] private float _acceleration = 2.0f;
         [SerializeField] private float _deceleration = 2.0f;
-        [SerializeField] private Transform _cameraRig;
-        [SerializeField] private CinemachineInputAxisController _axisController;
+        
+        [Header("Jumping")]
         [SerializeField] private Vector3 _gravity = Physics.gravity;
         [SerializeField] private float _groundCheckRadius;
         [SerializeField] private LayerMask _groundMask;
-        [SerializeField] private bool _isGrounded;
         [SerializeField] private float _jumpForce;
+        [SerializeField] private int _maxJumps = 1;
+        
+        [Header("Camera Tilt Settings (Strafing)")]
         [SerializeField] private float _maxTiltAngle;
         [SerializeField] private float _tiltSpeed;
-        [SerializeField] private CinemachineRecomposer _recomposer;
+        
+        [Header("Collision Settings")]
         [SerializeField] private float _skinWidth = 0.015f;
         [SerializeField] private int _maxBounces = 5;
         [SerializeField] private float _maxSlopeAngle = 55;
         
+        [Header("References")]
+        [SerializeField] private CinemachineRecomposer _recomposer;
+        [SerializeField] private CinemachineInputAxisController _axisController;
+        [SerializeField] private Transform _cameraRig;
+        
         private FPSActions _fpsActions;
 
-        // private Camera _camera;
+        // References
         private Rigidbody _rb;
 
+        // Private Variables
+        private bool _isGrounded;
         private Vector3 _velocity;
         private Vector2 _moveInput;
         private bool _jumpInput;
@@ -38,6 +49,8 @@ namespace Wannabuh.FPSController
         private float _verticalVelocity;
         private float _currentTilt;
         private Bounds _bounds;
+        private int _currentJump;
+        private int _extraJumps;
         
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Awake()
@@ -70,7 +83,7 @@ namespace Wannabuh.FPSController
         {
             foreach (var controller in _axisController.Controllers)
             {
-                controller.Input.Gain = controller.Name == "Look X (Pan)" ? _sensitivity : -_sensitivity;
+                controller.Input.Gain = controller.Name == "Look X (Pan)" ? _mouseSensitivity : -_mouseSensitivity;
             }
         }
 
@@ -96,7 +109,7 @@ namespace Wannabuh.FPSController
             float distance = velocity.magnitude + _skinWidth;
 
             RaycastHit hit;
-            if (Physics.SphereCast(pos, _bounds.extents.x, velocity.normalized, out hit, distance, _groundMask))
+            if (Physics.SphereCast(pos, _bounds.extents.x, velocity.normalized, out hit, distance, _groundMask, QueryTriggerInteraction.Ignore))
             {
                 Vector3 snapToSurface = velocity.normalized * (hit.distance - _skinWidth);
                 Vector3 leftOver = velocity - snapToSurface;
@@ -170,30 +183,39 @@ namespace Wannabuh.FPSController
         private void Jump()
         {
             Ray ray = new Ray(transform.position, Vector3.down);
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, _groundCheckRadius, _groundMask))
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, _groundCheckRadius, _groundMask, QueryTriggerInteraction.Ignore))
             {
                 _isGrounded = true;
                 if (_verticalVelocity < 0.0f)
                 {
-                    _verticalVelocity = -2.0f;
+                    _verticalVelocity = 0.0f;
+                    _currentJump = 0;
                 }
 
                 if (_jumpInput)
                 {
 					_verticalVelocity = Mathf.Sqrt(_jumpForce * -2f * _gravity.y);
+                    _currentJump++;
                 }
             }
             else
             {
                 _isGrounded = false;
+                if (_jumpInput && _currentJump < _maxJumps + _extraJumps)
+                {
+					_verticalVelocity = Mathf.Sqrt(_jumpForce * -2f * _gravity.y);
+                    _currentJump++;
+                }
                 _verticalVelocity += _gravity.y * Time.fixedDeltaTime;
             }
+
+            _jumpInput = false;
+            _extraJumps = 0;
         }
 
         private void Look()
         {
             float cameraYaw = _cameraRig.eulerAngles.y;
-            Debug.Log(cameraYaw);
             transform.rotation = Quaternion.Euler(0f, cameraYaw, 0f);
         }
 
@@ -213,6 +235,12 @@ namespace Wannabuh.FPSController
         private void OnJump(InputAction.CallbackContext ctx)
         {
             _jumpInput = Math.Abs(ctx.ReadValue<float>() - 1.0f) < 0.001f ? true : false;
+        }
+        
+        public void SetExtraJumps(int maxJumps)
+        {
+            Debug.Log(maxJumps);
+            _extraJumps += maxJumps;
         }
     }
 }

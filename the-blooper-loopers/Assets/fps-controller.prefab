@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5962230572202573986}
   - component: {fileID: 3815226809636037807}
   - component: {fileID: 7472522912856959355}
-  - component: {fileID: 8455382638656184771}
+  - component: {fileID: 622542724926282916}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -140,7 +140,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &8455382638656184771
+--- !u!114 &622542724926282916
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,28 +149,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 2726870737040891901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c8efcc525038eb639e2ea6e3536f02a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1972e65149779d34888befc2134b4a96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sensitivity: 20
+  _mouseSensitivity: 20
   _moveSpeed: 0.1
   _acceleration: 2
   _deceleration: 2
-  _cameraRig: {fileID: 5844298236957505603}
-  _axisController: {fileID: 1027919930107142925}
   _gravity: {x: 0, y: -22, z: 0}
-  _groundCheckRadius: 1
+  _groundCheckRadius: 0
   _groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  _isGrounded: 0
   _jumpForce: 1
-  _maxTiltAngle: 10
-  _tiltSpeed: 1
-  _recomposer: {fileID: 2176943003064760447}
+  _maxJumps: 1
+  _maxTiltAngle: 5
+  _tiltSpeed: 10
   _skinWidth: 0.015
   _maxBounces: 5
   _maxSlopeAngle: 55
+  _recomposer: {fileID: 0}
+  _axisController: {fileID: 0}
+  _cameraRig: {fileID: 0}
+  <Health>k__BackingField: 100
 --- !u!1 &2735797527877361967
 GameObject:
   m_ObjectHideFlags: 0
