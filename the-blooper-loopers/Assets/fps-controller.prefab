@@ -157,7 +157,7 @@ MonoBehaviour:
   _acceleration: 2
   _deceleration: 2
   _gravity: {x: 0, y: -22, z: 0}
-  _groundCheckRadius: 0
+  _groundCheckRadius: 1
   _groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -168,10 +168,10 @@ MonoBehaviour:
   _skinWidth: 0.015
   _maxBounces: 5
   _maxSlopeAngle: 55
-  _recomposer: {fileID: 0}
-  _axisController: {fileID: 0}
-  _cameraRig: {fileID: 0}
-  <Health>k__BackingField: 100
+  _recomposer: {fileID: 2176943003064760447}
+  _axisController: {fileID: 1027919930107142925}
+  _cameraRig: {fileID: 5844298236957505603}
+  <MaxHealth>k__BackingField: 100
 --- !u!1 &2735797527877361967
 GameObject:
   m_ObjectHideFlags: 0
