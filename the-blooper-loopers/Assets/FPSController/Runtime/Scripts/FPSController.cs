@@ -31,6 +31,8 @@ namespace Wannabuh.FPSController
         // private Camera _camera;
         private Rigidbody _rb;
 
+        private AudioSource Audio;
+
         private Vector3 _velocity;
         private Vector2 _moveInput;
         private bool _jumpInput;
@@ -43,6 +45,7 @@ namespace Wannabuh.FPSController
         void Awake()
         {
             _fpsActions = new FPSActions();
+            Audio = GetComponent<AudioSource>();
             _rb = GetComponent<Rigidbody>();
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
