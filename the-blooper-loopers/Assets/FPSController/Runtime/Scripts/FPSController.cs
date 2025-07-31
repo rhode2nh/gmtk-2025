@@ -99,7 +99,7 @@ namespace Wannabuh.FPSController
             float distance = velocity.magnitude + _skinWidth;
 
             RaycastHit hit;
-            if (Physics.SphereCast(pos, _bounds.extents.x, velocity.normalized, out hit, distance, _groundMask))
+            if (Physics.SphereCast(pos, _bounds.extents.x, velocity.normalized, out hit, distance, _groundMask, QueryTriggerInteraction.Ignore))
             {
                 Vector3 snapToSurface = velocity.normalized * (hit.distance - _skinWidth);
                 Vector3 leftOver = velocity - snapToSurface;
@@ -173,7 +173,7 @@ namespace Wannabuh.FPSController
         private void Jump()
         {
             Ray ray = new Ray(transform.position, Vector3.down);
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, _groundCheckRadius, _groundMask))
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, _groundCheckRadius, _groundMask, QueryTriggerInteraction.Ignore))
             {
                 _isGrounded = true;
                 if (_verticalVelocity < 0.0f)
@@ -196,7 +196,6 @@ namespace Wannabuh.FPSController
         private void Look()
         {
             float cameraYaw = _cameraRig.eulerAngles.y;
-            Debug.Log(cameraYaw);
             transform.rotation = Quaternion.Euler(0f, cameraYaw, 0f);
         }
 
