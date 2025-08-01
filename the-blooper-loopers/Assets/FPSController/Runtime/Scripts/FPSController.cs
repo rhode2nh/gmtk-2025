@@ -55,7 +55,7 @@ namespace Wannabuh.FPSController
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         protected virtual void Awake()
         {
-            _fpsActions = new FPSActions();
+            _fpsActions = InputManager.Instance.FPSActions;
             _rb = GetComponent<Rigidbody>();
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
