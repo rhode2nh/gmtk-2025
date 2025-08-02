@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private float _fireRate;
     [SerializeField] private float _damage;
     [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private Camera _fpsCamera;
 
     public event Action OnShoot;
 
@@ -18,6 +20,17 @@ public class Weapon : MonoBehaviour
     private void Awake()
     {
         _fpsActions = InputManager.Instance.FPSActions;
+    }
+
+    private void Start()
+    {
+        var baseCamData = Camera.main.GetUniversalAdditionalCameraData();
+        var fpsCameraData = _fpsCamera.GetUniversalAdditionalCameraData();
+
+        if (!baseCamData.cameraStack.Contains(_fpsCamera))
+        {
+            baseCamData.cameraStack.Add(_fpsCamera);
+        }
     }
 
     private void OnEnable()
