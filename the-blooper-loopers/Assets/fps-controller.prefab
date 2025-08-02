@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mouseSensitivity: 20
-  _moveSpeed: 0.1
+  _moveSpeed: 0.2
   _acceleration: 2
   _deceleration: 2
   _gravity: {x: 0, y: -22, z: 0}
@@ -161,8 +161,8 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  _jumpForce: 1
-  _maxJumps: 1
+  _jumpForce: 2
+  _maxJumps: 10
   _maxTiltAngle: 5
   _tiltSpeed: 10
   _skinWidth: 0.015
@@ -297,7 +297,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 80
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000

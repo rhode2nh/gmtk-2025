@@ -26509,6 +26509,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fps-controller
       objectReference: {fileID: 0}
+    - target: {fileID: 7906441965429932534, guid: 6d389f968484fcb43bede63e831b15c6, type: 3}
+      propertyPath: Lens.FieldOfView
+      value: 80
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29473,6 +29477,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1451525749 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6135597423002180833, guid: 6d389f968484fcb43bede63e831b15c6, type: 3}
+  m_PrefabInstance: {fileID: 1322989263}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1472308473
 GameObject:
   m_ObjectHideFlags: 0
@@ -41781,6 +41790,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 593782249923141081, guid: 6515e1c1a6cec3f7c8d27f75b9df1817, type: 3}
+      propertyPath: field of view
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 4810827211353853081, guid: 6515e1c1a6cec3f7c8d27f75b9df1817, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4
@@ -41823,8 +41836,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5838149423138090267, guid: 6515e1c1a6cec3f7c8d27f75b9df1817, type: 3}
       propertyPath: m_Cameras.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5838149423138090267, guid: 6515e1c1a6cec3f7c8d27f75b9df1817, type: 3}
+      propertyPath: 'm_Cameras.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1451525749}
     - target: {fileID: 7910778720742562056, guid: 6515e1c1a6cec3f7c8d27f75b9df1817, type: 3}
       propertyPath: m_Name
       value: MainCamera
