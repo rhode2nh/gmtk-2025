@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,8 +7,10 @@ public class TurretBehavior : MonoBehaviour
     public Transform target;
     public float rotationSpeed;
     public float rateOfFire;
+    public float timeElapsed;
     public float rotateThreshold;
     public GameObject turretProjectile;
+    public Transform bulletSpawner;
     public bool playerInTrigger;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,11 +26,15 @@ public class TurretBehavior : MonoBehaviour
         {
             Rotate();
         }
+
+        timeElapsed += Time.deltaTime;
+
     }
 
     void Shoot()
     {
-
+        Instantiate(turretProjectile, bulletSpawner.position, bulletSpawner.rotation);
+        
     }
 
     void Rotate()
@@ -38,11 +45,18 @@ public class TurretBehavior : MonoBehaviour
 
         var directionFromPlayerToTurret = (target.position - transform.position).normalized;
         float angle = Vector3.SignedAngle(transform.forward, directionFromPlayerToTurret, Vector3.up);
-        
+
         if (Vector3.Dot(transform.forward, directionFromPlayerToTurret) > rotateThreshold)
         {
             transform.Rotate(new Vector3(0, angle * rotationSpeed * Time.deltaTime, 0));
         }
+
+        if (timeElapsed > rateOfFire)
+        {
+            Shoot();
+            timeElapsed = 0;
+        }
+
     }
 
     void OnTriggerEnter(Collider other)
