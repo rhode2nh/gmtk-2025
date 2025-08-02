@@ -8,6 +8,8 @@ public class SpawnPoint : MonoBehaviour, IResetHandler
     [SerializeField] private bool _respawn;
     [SerializeField] private float _respawnTime;
 
+    private int _enemiesSpawned;
+
     public void Start()
     {
         Spawn();
@@ -21,6 +23,7 @@ public class SpawnPoint : MonoBehaviour, IResetHandler
     private void Spawn()
     {
         var instantiatedObject = Instantiate(_objectToSpawn, transform);
+        _enemiesSpawned++;
         if (!instantiatedObject.TryGetComponent(out ILifecycleNotifier notifier)) return;
         
         notifier.OnDone += StartSpawnTimer;

@@ -135,18 +135,7 @@ namespace Wannabuh.FPSController
                         -new Vector3(initialVelocity.x, 0, initialVelocity.z).normalized
                     );
 
-                    if (_isGrounded && !gravityPass)
-                    {
-                        leftOver = ProjectAndScale(
-                            new Vector3(leftOver.x, 0, leftOver.z),
-                            new Vector3(hit.normal.x, 0, hit.normal.z)
-                        ).normalized;
-                        leftOver *= scale;
-                    }
-                    else
-                    {
-                        leftOver = ProjectAndScale(leftOver, hit.normal) * scale;
-                    }
+                    leftOver = ProjectAndScale(leftOver, hit.normal) * scale;
                 }
 
                 return snapToSurface + CollideAndSlide(leftOver, pos + snapToSurface, depth + 1, gravityPass, initialVelocity);

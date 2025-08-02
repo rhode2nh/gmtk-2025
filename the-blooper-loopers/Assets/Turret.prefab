@@ -172,7 +172,7 @@ Transform:
   m_GameObject: {fileID: 7989466632679324969}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1004214, y: 1.0833335, z: -2.8426232}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -296,3 +296,4 @@ MonoBehaviour:
   turretProjectile: {fileID: 2923515906449962141, guid: 0ec69a5fb6eeb474aac602d78e325e45, type: 3}
   bulletSpawner: {fileID: 6863502554933055340}
   playerInTrigger: 0
+  health: 0

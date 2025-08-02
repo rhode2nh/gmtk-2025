@@ -1,8 +1,7 @@
-using JetBrains.Annotations;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
-public class TurretBehavior : MonoBehaviour
+public class TurretBehavior : MonoBehaviour, IDamagable, ILifecycleNotifier
 {
     public Transform target;
     public float rotationSpeed;
@@ -12,6 +11,9 @@ public class TurretBehavior : MonoBehaviour
     public GameObject turretProjectile;
     public Transform bulletSpawner;
     public bool playerInTrigger;
+    public float health;
+
+    public event Action OnDone;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -77,4 +79,20 @@ public class TurretBehavior : MonoBehaviour
         } 
     }
 
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        OnDone?.Invoke();
+        OnDone = null;
+        LevelManager.Instance.IncrementEnemyKillCounter();
+        Destroy(gameObject);
+    }
 }

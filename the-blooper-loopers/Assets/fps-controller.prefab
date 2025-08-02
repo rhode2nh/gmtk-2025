@@ -522,3 +522,9 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 55
+  _fpsCamera: {fileID: 6135597423002180833}
+--- !u!20 &6135597423002180833 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4067477227306240017, guid: 333950c27b53b15978235cc6add4d2c3, type: 3}
+  m_PrefabInstance: {fileID: 7878081789578482928}
+  m_PrefabAsset: {fileID: 0}
