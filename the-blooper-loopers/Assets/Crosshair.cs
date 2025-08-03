@@ -17,7 +17,7 @@ public class Crosshair : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit,
                 Mathf.Infinity, _layerMask, QueryTriggerInteraction.Ignore))
         {
-            _rawImage.color = hit.transform.GetComponent<TurretBehavior>() ? Color.red : Color.white;
+            _rawImage.color = hit.transform.GetComponent<ICrosshairNotifier>() != null ? Color.red : Color.white;
         }
     }
 }

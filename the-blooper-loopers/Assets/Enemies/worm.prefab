@@ -154,7 +154,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 30
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &915293343877125777
 MonoBehaviour:
@@ -174,7 +174,7 @@ MonoBehaviour:
   attackDamage: 20
   attackRange: 1.5
   attackDelay: 0.5
-  health: 2
+  health: 40
   speed: 8
   aggroDuration: 4
   chaseInterval: 0.05

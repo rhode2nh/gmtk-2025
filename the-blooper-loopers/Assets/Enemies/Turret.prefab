@@ -296,4 +296,4 @@ MonoBehaviour:
   turretProjectile: {fileID: 2923515906449962141, guid: 0ec69a5fb6eeb474aac602d78e325e45, type: 3}
   bulletSpawner: {fileID: 6863502554933055340}
   playerInTrigger: 0
-  health: 0
+  health: 50
