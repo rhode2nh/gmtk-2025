@@ -15,10 +15,12 @@ public class TurretBehavior : MonoBehaviour, IDamagable, ILifecycleNotifier, ICr
 
     public event Action OnDone;
 
+    AudioSource audioWeaponFire;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        audioWeaponFire = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,7 +38,7 @@ public class TurretBehavior : MonoBehaviour, IDamagable, ILifecycleNotifier, ICr
     void Shoot()
     {
         Instantiate(turretProjectile, bulletSpawner.position, bulletSpawner.rotation);
-        
+        audioWeaponFire.Play();
     }
 
     void Rotate()
