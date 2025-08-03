@@ -23,6 +23,8 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Item item)
     {
+        if (item.IsConsumable) return;
+        
         _statList.Add(item.statsData);
         UpdateStats();
     }
