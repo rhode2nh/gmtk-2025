@@ -17,6 +17,8 @@ public class Weapon : MonoBehaviour
     private bool _isShooting;
     private bool _coroutineStarted;
 
+    AudioSource audioWeaponFire;
+
     private void Awake()
     {
         _fpsActions = InputManager.Instance.FPSActions;
@@ -26,6 +28,8 @@ public class Weapon : MonoBehaviour
     {
         var baseCamData = Camera.main.GetUniversalAdditionalCameraData();
         var fpsCameraData = _fpsCamera.GetUniversalAdditionalCameraData();
+
+        audioWeaponFire = GetComponent<AudioSource>();
 
         if (!baseCamData.cameraStack.Contains(_fpsCamera))
         {
@@ -72,6 +76,7 @@ public class Weapon : MonoBehaviour
                 }
             }
             OnShoot?.Invoke();
+            audioWeaponFire.Play();
             yield return new WaitForSeconds(_fireRate);
         }
 
