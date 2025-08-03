@@ -2,12 +2,13 @@ using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
+using System;
 
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public class WormBehaviour : MonoBehaviour, IDamagable, ICrosshairNotifier
+public class WormBehaviour : MonoBehaviour, IDamagable, ICrosshairNotifier, ILifecycleNotifier
 {
     public NavMeshAgent agent;
     public Collider sightCollider;
@@ -27,6 +28,8 @@ public class WormBehaviour : MonoBehaviour, IDamagable, ICrosshairNotifier
     private bool isInTrigger;
     private Player player;
     private Vector3 playerPos;
+
+    public event Action OnDone;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -137,6 +140,8 @@ public class WormBehaviour : MonoBehaviour, IDamagable, ICrosshairNotifier
 
     private void Die()
     {
+        OnDone?.Invoke();
+        OnDone = null;
         LevelManager.Instance.IncrementEnemyKillCounter();
         Destroy(gameObject);
     }
