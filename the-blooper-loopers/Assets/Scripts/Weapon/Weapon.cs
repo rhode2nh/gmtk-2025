@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, IStatNotifier
 {
     [SerializeField] private float _fireRate;
     [SerializeField] private float _damage;
@@ -16,6 +17,10 @@ public class Weapon : MonoBehaviour
     private FPSActions _fpsActions;
     private bool _isShooting;
     private bool _coroutineStarted;
+    
+    // Stat Upgrade Values
+    private float _damageMultiplier = 1.0f;
+    private float _fireRateMultiplier = 1.0f;
 
     AudioSource audioWeaponFire;
 
@@ -72,14 +77,27 @@ public class Weapon : MonoBehaviour
             {
                 if (hit.transform.TryGetComponent(out IDamagable damagable))
                 {
-                    damagable.TakeDamage(_damage);
+                    damagable.TakeDamage(_damage * _damageMultiplier);
                 }
             }
             OnShoot?.Invoke();
             audioWeaponFire.Play();
-            yield return new WaitForSeconds(_fireRate);
+            yield return new WaitForSeconds(_fireRate / _fireRateMultiplier);
         }
 
         _coroutineStarted = false;
+    }
+
+    public void UpdateStats(List<StatsData> statList)
+    {
+        _damageMultiplier = 1f;
+        _fireRateMultiplier = 1f;
+        foreach (var statData in statList)
+        {
+            _damageMultiplier += statData.Damage;
+            _fireRateMultiplier += statData.FireRateMultiplier;
+        }
+        
+        Debug.Log(_fireRateMultiplier);
     }
 }
