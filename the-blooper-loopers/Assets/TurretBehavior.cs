@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class TurretBehavior : MonoBehaviour, IDamagable, ILifecycleNotifier, ICrosshairNotifier
@@ -48,12 +49,8 @@ public class TurretBehavior : MonoBehaviour, IDamagable, ILifecycleNotifier, ICr
         //gradually move at rotation speed until the turret orientation == angle towards player
 
         var directionFromPlayerToTurret = (target.position - transform.position).normalized;
-        float angle = Vector3.SignedAngle(transform.forward, directionFromPlayerToTurret, Vector3.up);
-
-        if (Vector3.Dot(transform.forward, directionFromPlayerToTurret) > rotateThreshold)
-        {
-            transform.Rotate(new Vector3(0, angle * rotationSpeed * Time.deltaTime, 0));
-        }
+        var targetRotation = Quaternion.LookRotation(directionFromPlayerToTurret);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
         if (timeElapsed > rateOfFire)
         {
