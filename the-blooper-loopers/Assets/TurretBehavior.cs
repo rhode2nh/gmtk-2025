@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class TurretBehavior : MonoBehaviour, IDamagable, ILifecycleNotifier
+public class TurretBehavior : MonoBehaviour, IDamagable, ILifecycleNotifier, ICrosshairNotifier
 {
     public Transform target;
     public float rotationSpeed;

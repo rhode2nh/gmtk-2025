@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public class WormBehaviour : MonoBehaviour
+public class WormBehaviour : MonoBehaviour, IDamagable, ICrosshairNotifier
 {
     public NavMeshAgent agent;
     public Collider sightCollider;
@@ -125,5 +125,19 @@ public class WormBehaviour : MonoBehaviour
         playerPos = player.GetComponent<Transform>().position;
         Vector3 wormPosition = GetComponent<Transform>().position;
         return Vector3.Distance(wormPosition, playerPos) <= distance;
+    }
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        LevelManager.Instance.IncrementEnemyKillCounter();
+        Destroy(gameObject);
     }
 }
