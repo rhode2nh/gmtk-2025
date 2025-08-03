@@ -97,7 +97,5 @@ public class Weapon : MonoBehaviour, IStatNotifier
             _damageMultiplier += statData.Damage;
             _fireRateMultiplier += statData.FireRateMultiplier;
         }
-        
-        Debug.Log(_fireRateMultiplier);
     }
 }

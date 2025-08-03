@@ -92,8 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931ab8685273284d28d8b4441a60dca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Health>k__BackingField: 0
-  _rotationSpeed: 0
+  <IsConsumable>k__BackingField: 1
+  <Health>k__BackingField: 20
+  _rotationSpeed: 45
+  <statsData>k__BackingField: {fileID: 0}
 --- !u!135 &7622843948285871938
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -109,7 +111,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

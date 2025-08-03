@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour, ILifecycleNotifier
 {
+    [field: SerializeField] public bool IsConsumable { get; private set; }
     [field: SerializeField] public float Health { get; private set; }
     [SerializeField] private float _rotationSpeed;
     [field: SerializeField] public StatsData statsData { get; private set; }
