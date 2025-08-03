@@ -22,6 +22,8 @@ public class Weapon : MonoBehaviour, IStatNotifier
     private float _damageMultiplier = 1.0f;
     private float _fireRateMultiplier = 1.0f;
 
+    AudioSource audioWeaponFire;
+
     private void Awake()
     {
         _fpsActions = InputManager.Instance.FPSActions;
@@ -31,6 +33,8 @@ public class Weapon : MonoBehaviour, IStatNotifier
     {
         var baseCamData = Camera.main.GetUniversalAdditionalCameraData();
         var fpsCameraData = _fpsCamera.GetUniversalAdditionalCameraData();
+
+        audioWeaponFire = GetComponent<AudioSource>();
 
         if (!baseCamData.cameraStack.Contains(_fpsCamera))
         {
@@ -77,7 +81,7 @@ public class Weapon : MonoBehaviour, IStatNotifier
                 }
             }
             OnShoot?.Invoke();
-            Debug.Log(_fireRateMultiplier);
+            audioWeaponFire.Play();
             yield return new WaitForSeconds(_fireRate / _fireRateMultiplier);
         }
 

@@ -39,6 +39,7 @@ namespace Wannabuh.FPSController
 
         // References
         private Rigidbody _rb;
+        public AudioClip[] jumpGasps;
 
         // Private Variables
         private bool _isGrounded;
@@ -51,6 +52,7 @@ namespace Wannabuh.FPSController
         private Bounds _bounds;
         private int _currentJump;
         private int _extraJumps;
+        private AudioSource audioSource;
         
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         protected virtual void Awake()
@@ -85,6 +87,8 @@ namespace Wannabuh.FPSController
             {
                 controller.Input.Gain = controller.Name == "Look X (Pan)" ? _mouseSensitivity : -_mouseSensitivity;
             }
+
+            audioSource = GetComponent<AudioSource>();
         }
 
         private void LateUpdate()
@@ -177,14 +181,20 @@ namespace Wannabuh.FPSController
                 _isGrounded = true;
                 if (_verticalVelocity < 0.0f)
                 {
+                    AudioClip clip = jumpGasps[3];
+                    audioSource.clip = clip;
+                    audioSource.Play();
                     _verticalVelocity = 0.0f;
                     _currentJump = 0;
                 }
 
                 if (_jumpInput)
                 {
-					_verticalVelocity = Mathf.Sqrt(_jumpForce * -2f * _gravity.y);
+                    _verticalVelocity = Mathf.Sqrt(_jumpForce * -2f * _gravity.y);
                     _currentJump++;
+                    AudioClip clip = jumpGasps[(int)UnityEngine.Random.Range(0, 3)];
+                    audioSource.clip = clip;
+                    audioSource.Play();
                 }
             }
             else
@@ -192,8 +202,11 @@ namespace Wannabuh.FPSController
                 _isGrounded = false;
                 if (_jumpInput && _currentJump < _maxJumps + _extraJumps)
                 {
-					_verticalVelocity = Mathf.Sqrt(_jumpForce * -2f * _gravity.y);
+                    _verticalVelocity = Mathf.Sqrt(_jumpForce * -2f * _gravity.y);
                     _currentJump++;
+                    AudioClip clip = jumpGasps[(int)UnityEngine.Random.Range(0, 3)];
+                    audioSource.clip = clip;
+                    audioSource.Play();
                 }
                 _verticalVelocity += _gravity.y * Time.fixedDeltaTime;
             }

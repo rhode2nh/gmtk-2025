@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class TurretBehavior : MonoBehaviour, IDamagable, ILifecycleNotifier
+public class TurretBehavior : MonoBehaviour, IDamagable, ILifecycleNotifier, ICrosshairNotifier
 {
     public Transform target;
     public float rotationSpeed;
@@ -15,10 +15,12 @@ public class TurretBehavior : MonoBehaviour, IDamagable, ILifecycleNotifier
 
     public event Action OnDone;
 
+    AudioSource audioWeaponFire;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        audioWeaponFire = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,7 +38,7 @@ public class TurretBehavior : MonoBehaviour, IDamagable, ILifecycleNotifier
     void Shoot()
     {
         Instantiate(turretProjectile, bulletSpawner.position, bulletSpawner.rotation);
-        
+        audioWeaponFire.Play();
     }
 
     void Rotate()
