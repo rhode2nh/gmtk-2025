@@ -291,7 +291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   rotationSpeed: 7
-  rateOfFire: 2
+  rateOfFire: 0.3
   timeElapsed: 0
   rotateThreshold: -0.8
   turretProjectile: {fileID: 2923515906449962141, guid: 0ec69a5fb6eeb474aac602d78e325e45, type: 3}
