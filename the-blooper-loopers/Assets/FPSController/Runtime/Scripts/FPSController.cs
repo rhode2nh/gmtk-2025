@@ -199,7 +199,6 @@ namespace Wannabuh.FPSController
             }
 
             _jumpInput = false;
-            _extraJumps = 0;
         }
 
         private void Look()
@@ -228,8 +227,7 @@ namespace Wannabuh.FPSController
         
         public void SetExtraJumps(int maxJumps)
         {
-            Debug.Log(maxJumps);
-            _extraJumps += maxJumps;
+            _extraJumps = maxJumps;
         }
     }
 }
