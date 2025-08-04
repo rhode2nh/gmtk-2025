@@ -27658,6 +27658,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 622542724926282916, guid: 6d389f968484fcb43bede63e831b15c6, type: 3}
+      propertyPath: _mouseSensitivity
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1027919930107142925, guid: 6d389f968484fcb43bede63e831b15c6, type: 3}
       propertyPath: m_ControllerManager.Controllers.Array.data[0].Driver.AccelTime
       value: 0
